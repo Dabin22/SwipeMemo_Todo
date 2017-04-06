@@ -1,0 +1,70 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="default_margin">16dp</dimen>
+    <dimen name="half_margin">8dp</dimen>
+    <!--Memo(Common) dimens-->
+    <!--Header-->
+    <!--margin-->
+    <dimen name="memo_vertical_margin">@dimen/half_margin</dimen>
+    <dimen name="memo_horizontal_margin">@dimen/default_margin</dimen>
+    <!--memoview size-->
+    <dimen name="memo_child_width_height">25dp</dimen>
+    <dimen name="memo_seekBar_progress_margin">11.5dp</dimen>
+    <dimen name="memo_seekBar_progress_width">95dp</dimen>
+    <dimen name="memo_typeButton_width">102.5dp</dimen>
+    <dimen name="memo_line_height">1dp</dimen>
+
+    <!--InnerMemo dimens-->
+    <dimen name="innerMemo_vertical_margin">16dp</dimen>
+    <dimen name="innerMemo_horizontal_margin">16dp</dimen>
+    <dimen name="innerMemo_title_body_margin">12dp</dimen>
+    <!--Text-->
+    <dimen name="innerMemo_title_text_size">15sp</dimen>
+    <dimen name="innerMemo_body_text_size">14sp</dimen>
+    <dimen name="innerMemo_option_text_size">12sp</dimen>
+    <!--View-->
+    <dimen name="innerMemo_child_width_height">15dp</dimen>
+    <dimen name="innerMemo_star_width_height">20dp</dimen>
+    <dimen name="innerMemo_spinner_width">85dp</dimen>
+    <!--memosPresenter-->
+    <dimen name="memoViewer_searchBar_height">25dp</dimen>
+    <dimen name="memoViewer_searchBar_btn_width">15dp</dimen>
+    <dimen name="memoViewer_searchBar_btn_height">15dp</dimen>
+    <dimen name="memoViewer_folderBar_height">28dp</dimen>
+    <dimen name="memoViewer_folderBar_importance_width">44dp</dimen>
+    <dimen name="memoViewer_folderBar_item_height">28dp</dimen>
+    <dimen name="memoViewer_folderBar_add_width">62dp</dimen>
+
+    <!--todoViewer-->
+    <dimen name="todoViewer_btn_move_dimen">43dp</dimen>
+    <dimen name="todoViewer_menu_bar_height">43dp</dimen>
+    <dimen name="todoViewer_btn_trash_dimen">43dp</dimen>
+    <dimen name="todoViewer_line_height">1dp</dimen>
+    <dimen name="todoViewer_large_text">72sp</dimen>
+    <!--memoItem-->
+    <dimen name="memoItem_height">133dp</dimen>
+    <dimen name="memoItem_cardRadius">1.5dp</dimen>
+    <dimen name="memoItem_vertical_margin">10dp</dimen>
+    <dimen name="memoItem_horizontal_margin">15dp</dimen>
+    <dimen name="memoItem_upperBar_height">15dp</dimen>
+    <dimen name="memoItem_titleBar_height">20dp</dimen>
+    <dimen name="memoItem_titleBar_logo_dimen">@dimen/memoItem_titleBar_height</dimen>
+    <dimen name="memoItem_titleBar_item_height">15dp</dimen>
+    <!--todoItem-->
+    <dimen name="todoItem_height">45dp</dimen>
+    <dimen name="todoItem_default_item_width">25dp</dimen>
+    <dimen name="todoItem_default_item_height">25dp</dimen>
+
+    <!--editor-->
+    <dimen name="editor_spanner_width">100dp</dimen>
+    <dimen name="editor_save_btn">60dp</dimen>
+    <dimen name="innerMemo_titleBar_folder_dimen">15dp</dimen>
+    <dimen name="todoItem_margin">8dp</dimen>
+    <dimen name="memoItem_btn_delete_dimen">65dp</dimen>
+    <dimen name="todoItem_btn_trash_dimen">22dp</dimen>
+    <dimen name="todoViewer_spinner_type_height">40dp</dimen>
+    <dimen name="todoViewer_min_margin">5dp</dimen>
+    <dimen name="todoItem_registered_btn_trash_dimen">18dp</dimen>
+    <dimen name="todoItem_before_registered_btn_trash_dimen">18dp</dimen>
+
+</resources>

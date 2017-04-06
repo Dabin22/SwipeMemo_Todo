@@ -1,0 +1,37 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="TextAppearance_title">
+        <item name="android:textSize">@dimen/innerMemo_title_text_size</item>
+        <item name="android:textColor">@color/memoTextColor</item>
+    </style>
+
+    <style name="TextAppearance_body">
+        <item name="android:textSize">@dimen/innerMemo_body_text_size</item>
+        <item name="android:textColor">@color/memoTextColor</item>
+    </style>
+
+    <style name="TextAppearance_option">
+        <item name="android:textSize">@dimen/innerMemo_option_text_size</item>
+        <item name="android:textColor">@color/memoFolderColor</item>
+    </style>
+
+    <style name="TextAppearance_date_default" parent="TextAppearance_title">
+        <item name="android:textColor">@color/whiteText</item>
+    </style>
+    <style name="TextAppearance_date_large" parent="TextAppearance_date_default">
+        <item name="android:textSize">@dimen/todoViewer_large_text</item>
+    </style>
+
+    <style name="DateDialogTheme" >
+        <item name="colorAccent">@color/todoKeyColor</item>
+    </style>
+
+</resources>

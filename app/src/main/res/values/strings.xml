@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">SwipeMemo</string>
+
+    <string name="TitleHint">Title</string>
+    <string name="ContentHint">Content</string>
+    <string name="CopyAll">Copy All</string>
+    <string name="Paste">Paste</string>
+    <string name="ClearAll">Clear All</string>
+    <string name="NewFolder">새 폴더</string>
+    <string name="Cancel">취소</string>
+    <string name="Confirm">확인</string>
+    <string name="Plz_check_pw">비밀번호를 확인해주십시오.</string>
+    <string name="Least_one_letter">최소 한 글자 이상 입력해주십시오.</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="memoSaved">Memo is Modified</string>
+    <string name="gotoApp">Go to application</string>
+
+</resources>

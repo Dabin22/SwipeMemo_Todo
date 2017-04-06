@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".viewer.fragments.memo.controller.MemoViewerFragment">
+    <LinearLayout
+        android:id="@+id/memoViewer_searchBar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/memoViewer_searchBar_height"
+        android:layout_marginTop="@dimen/half_margin"
+        android:layout_marginBottom="@dimen/half_margin"
+        android:layout_marginLeft="@dimen/default_margin"
+        android:layout_marginRight="@dimen/default_margin"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_marginEnd="@dimen/default_margin"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@color/memoViewer_item_background">
+
+        <ToggleButton
+            android:id="@+id/memoViewer_folderBar_importance"
+            android:layout_width="@dimen/memoViewer_folderBar_importance_width"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/todoViewer_min_margin"
+            android:background="@drawable/icon_importance"
+            android:textOn=""
+            android:textOff=""/>
+
+        <EditText
+            android:id="@+id/memoViewer_searchBar_editText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <Button
+            android:id="@+id/memoViewer_searchBar_icon"
+            android:layout_width="@dimen/memoViewer_searchBar_btn_width"
+            android:layout_height="@dimen/memoViewer_searchBar_btn_height"
+            android:layout_margin="@dimen/todoViewer_min_margin"
+            android:background="@drawable/icon_serach"
+            android:scaleType="fitCenter"/>
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/memoViewer_memoList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/half_margin"
+        android:layout_marginBottom="@dimen/half_margin"
+        android:layout_marginLeft="@dimen/default_margin"
+        android:layout_marginRight="@dimen/default_margin"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_marginEnd="@dimen/default_margin"
+        />
+</LinearLayout>

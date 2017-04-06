@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.swipememo.swipememo.customviews.SlideWithMenu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent">
+    <Button
+        android:id="@+id/todoItem_delete"
+        android:layout_width="@dimen/todoItem_btn_trash_dimen"
+        android:layout_height="@dimen/todoItem_btn_trash_dimen"
+        android:layout_gravity="center"
+        android:background="@drawable/icon_trash"/>
+    <android.support.v7.widget.CardView
+        app:cardCornerRadius="@dimen/memoItem_cardRadius"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        >
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/todoItem_height"
+            android:gravity="center_vertical">
+            <com.swipememo.swipememo.customviews.DateButton
+                android:id="@+id/todoItem_date"
+                android:layout_width="@dimen/todoItem_default_item_width"
+                android:layout_height="@dimen/todoItem_default_item_height"
+                android:layout_margin="@dimen/todoItem_margin"
+                android:background="@drawable/td_btn_calendar_icon"
+                />
+            <EditText
+                android:id="@+id/todoItem_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/todoItem_margin"/>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</com.swipememo.swipememo.customviews.SlideWithMenu>

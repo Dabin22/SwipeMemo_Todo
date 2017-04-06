@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.swipememo.swipememo.customviews.SlideWithMenu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent">
+    <Button
+        android:id="@+id/todoItem_registered_delete"
+        android:layout_width="@dimen/todoItem_registered_btn_trash_dimen"
+        android:layout_height="@dimen/todoItem_registered_btn_trash_dimen"
+        android:layout_gravity="center"
+        android:background="@drawable/icon_trash"/>
+    <android.support.v7.widget.CardView
+        app:cardCornerRadius="@dimen/memoItem_cardRadius"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        >
+        <com.swipememo.swipememo.customviews.SlideOutTextView
+            android:id="@+id/todoitem_registered_slide"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/todoItem_height"
+            android:gravity="center_vertical">
+            <CheckBox
+                android:id="@+id/todoItem_registered_checkbox"
+                android:layout_width="@dimen/todoItem_default_item_width"
+                android:layout_height="@dimen/todoItem_default_item_height"
+                android:layout_margin="@dimen/todoItem_margin"
+                />
+            <TextView
+                android:id="@+id/todoItem_registered_text"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/todoItem_margin"/>
+        </com.swipememo.swipememo.customviews.SlideOutTextView>
+    </android.support.v7.widget.CardView>
+</com.swipememo.swipememo.customviews.SlideWithMenu>

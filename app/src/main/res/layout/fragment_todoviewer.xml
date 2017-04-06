@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".viewer.fragments.todo.controller.TodoControllerFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/menu_layout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/todoViewer_menu_bar_height"
+            android:background="@color/todoKeyColor"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <Button
+                android:id="@+id/btn_todo_before"
+                android:layout_width="@dimen/todoViewer_btn_move_dimen"
+                android:layout_height="@dimen/todoViewer_btn_move_dimen"
+                android:background="@drawable/todo_icon_left" />
+
+            <TextView
+                android:id="@+id/tv_todo_calendar"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="11"
+                android:textAppearance="@style/TextAppearance_date_default"/>
+
+            <Button
+                android:id="@+id/btn_todo_next"
+                android:layout_width="@dimen/todoViewer_btn_move_dimen"
+                android:layout_height="@dimen/todoViewer_btn_move_dimen"
+                android:background="@drawable/todo_icon_right" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/delete_layout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/todoViewer_menu_bar_height"
+            android:background="@color/todoKeyColor"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/iv_delete"
+                android:layout_width="@dimen/todoViewer_btn_trash_dimen"
+                android:layout_height="@dimen/todoViewer_btn_trash_dimen"
+                app:srcCompat="@drawable/icon_trash_memo" />
+        </LinearLayout>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:cardCornerRadius="5dp">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:background="@color/todoKeyColorLight">
+
+
+                    <TextView
+                        android:id="@+id/bg_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:alpha="0.4"
+                        android:textAppearance="@style/TextAppearance_date_large"
+                        android:text="11"
+                        />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/registered_todoList"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/half_margin"
+                        android:background="@color/transparent">
+
+                    </android.support.v7.widget.RecyclerView>
+
+            </FrameLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:cardCornerRadius="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:background="@color/barColor">
+
+                <Spinner
+                    android:id="@+id/sp_todoType"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/todoViewer_spinner_type_height"
+                    />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/todoViewer_line_height"
+                    android:background="@color/lineColor"/>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/unRegister_todoList"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/default_margin"
+                    android:background="@color/todoBGColor" />
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+
+    </LinearLayout>
+
+</FrameLayout>

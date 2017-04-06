@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">@color/memoKeyColor</color>
+    <color name="colorPrimaryDark">@color/memoKeyColorLightPr</color>
+    <color name="colorAccent">#f75139</color>
+    <color name="colorAccentDark">#dc4833</color>
+    <color name="barColor">#ffffff</color>
+    <color name="lineColor">#ececec</color>
+    <color name="transparent">#00000000</color>
+    <color name="darker">#05000000</color>
+
+    <!--Memo's-->
+    <color name="memoKeyColor">#235cff</color>
+    <color name="memoKeyColorLight">#e9eeff</color>
+    <color name="memoKeyColorLightPr">#33225cff</color>
+    <color name="memoTextColor">#474a4f</color>
+    <color name="memoFolderColor">#7f848d</color>
+    <color name="memoBGColor">#fafafa</color>
+
+    <!--TodoController's-->
+    <color name="todoKeyColor">#00ca4c</color>
+    <color name="todoKeyColorLight">#e8f5e0</color>
+    <color name="todoTextColor">#474a4f</color>
+    <color name="todoBGColor">#fafafa</color>
+
+    <!--fragment_memoViewer-->
+    <color name="memoViewer_item_background">#ececec</color>
+    <color name="whiteText">#ffffffff</color>
+
+
+    <!--fragment_todoViewer-->
+
+</resources>
