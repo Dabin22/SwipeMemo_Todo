@@ -54,17 +54,16 @@
     <dimen name="todoItem_height">45dp</dimen>
     <dimen name="todoItem_default_item_width">25dp</dimen>
     <dimen name="todoItem_default_item_height">25dp</dimen>
-
+    <dimen name="todoItem_registered_btn_trash_dimen">22dp</dimen>
+    <dimen name="todoItem_before_registered_btn_trash_dimen">22dp</dimen>
+    <dimen name="todoItem_btn_trash_dimen">22dp</dimen>
+    <dimen name="todoItem_margin">8dp</dimen>
     <!--editor-->
     <dimen name="editor_spanner_width">100dp</dimen>
     <dimen name="editor_save_btn">60dp</dimen>
     <dimen name="innerMemo_titleBar_folder_dimen">15dp</dimen>
-    <dimen name="todoItem_margin">8dp</dimen>
     <dimen name="memoItem_btn_delete_dimen">65dp</dimen>
-    <dimen name="todoItem_btn_trash_dimen">22dp</dimen>
     <dimen name="todoViewer_spinner_type_height">40dp</dimen>
     <dimen name="todoViewer_min_margin">5dp</dimen>
-    <dimen name="todoItem_registered_btn_trash_dimen">18dp</dimen>
-    <dimen name="todoItem_before_registered_btn_trash_dimen">18dp</dimen>
 
 </resources>

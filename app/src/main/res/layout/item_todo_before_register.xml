@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.swipememo.swipememo.customviews.SlideWithMenu
+<com.swipememo.swipememo.customviews.ItemContainer
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="wrap_content"
     android:layout_width="match_parent">
-    <Button
+    <com.swipememo.swipememo.customviews.MenuView
         android:id="@+id/todoItem_before_registered_delete"
         android:layout_width="@dimen/todoItem_before_registered_btn_trash_dimen"
         android:layout_height="@dimen/todoItem_before_registered_btn_trash_dimen"
-        android:layout_gravity="center"
+        android:layout_marginLeft="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginStart="50dp"
+        android:layout_gravity="center|end"
         android:background="@drawable/icon_trash"/>
-    <android.support.v7.widget.CardView
+    <com.swipememo.swipememo.customviews.FlingCardView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         app:cardCornerRadius="@dimen/memoItem_cardRadius"
@@ -18,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         >
-        <com.swipememo.swipememo.customviews.SlideWithMenu
+        <LinearLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -43,6 +47,6 @@
                 android:layout_height="@dimen/todoItem_default_item_height"
                 android:layout_width="25dp"
                 android:background="@drawable/td_btn_flingable"/>
-        </com.swipememo.swipememo.customviews.SlideWithMenu>
-    </android.support.v7.widget.CardView>
-</com.swipememo.swipememo.customviews.SlideWithMenu>
+        </LinearLayout>
+    </com.swipememo.swipememo.customviews.FlingCardView>
+</com.swipememo.swipememo.customviews.ItemContainer>

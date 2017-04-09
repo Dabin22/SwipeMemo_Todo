@@ -12,12 +12,13 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.swipememo.swipememo.R;
-import com.swipememo.swipememo.customviews.SlideWithMenu;
+import com.swipememo.swipememo.customviews.ItemContainer;
 import com.swipememo.swipememo.model.types.SelectedTodo;
 import com.swipememo.swipememo.model.types.TodoViewType;
 import com.swipememo.swipememo.viewer.fragments.todo.controller.TodoController;
 import com.swipememo.swipememo.viewer.fragments.todo.listener.TodoDragListener;
 import com.swipememo.swipememo.viewer.fragments.todo.listener.TodoLongClickListener;
+
 
 import io.realm.OrderedRealmCollection;
 import io.realm.RealmRecyclerViewAdapter;
@@ -51,7 +52,7 @@ public class RegisteredAdapter extends RealmRecyclerViewAdapter<SelectedTodo, Re
 
     @Override
     public RegisteredAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        SlideWithMenu view = (SlideWithMenu)LayoutInflater.from(context).inflate(R.layout.item_todo_registered, parent, false);
+        ItemContainer view = (ItemContainer)LayoutInflater.from(context).inflate(R.layout.item_todo_registered, parent, false);
         return new ViewHolder(view);
     }
 
