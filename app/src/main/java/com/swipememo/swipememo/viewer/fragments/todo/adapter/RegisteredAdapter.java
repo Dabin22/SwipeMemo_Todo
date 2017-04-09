@@ -9,21 +9,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.swipememo.swipememo.R;
 import com.swipememo.swipememo.customviews.SlideWithMenu;
 import com.swipememo.swipememo.model.types.SelectedTodo;
+import com.swipememo.swipememo.model.types.TodoViewType;
 import com.swipememo.swipememo.viewer.fragments.todo.controller.TodoController;
 import com.swipememo.swipememo.viewer.fragments.todo.listener.TodoDragListener;
 import com.swipememo.swipememo.viewer.fragments.todo.listener.TodoLongClickListener;
-import com.swipememo.swipememo.model.types.TodoViewType;
-
-import java.text.ParsePosition;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 
 import io.realm.OrderedRealmCollection;
 import io.realm.RealmRecyclerViewAdapter;
@@ -52,6 +46,7 @@ public class RegisteredAdapter extends RealmRecyclerViewAdapter<SelectedTodo, Re
         this.controller = controller;
         datas = data.sort("no", Sort.DESCENDING);
     }
+
 
 
     @Override

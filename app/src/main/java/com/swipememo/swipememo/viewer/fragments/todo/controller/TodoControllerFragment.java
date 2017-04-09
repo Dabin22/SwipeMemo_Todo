@@ -14,8 +14,8 @@ import com.swipememo.swipememo.model.database.RealmHelper;
 import com.swipememo.swipememo.model.types.SelectedTodo;
 import com.swipememo.swipememo.model.types.Todo;
 import com.swipememo.swipememo.viewer.fragments.todo.adapter.RegisteredAdapter;
-import com.swipememo.swipememo.viewer.fragments.todo.listener.TodoDragListener;
 import com.swipememo.swipememo.viewer.fragments.todo.adapter.UnRegisterAdapter;
+import com.swipememo.swipememo.viewer.fragments.todo.listener.TodoDragListener;
 import com.swipememo.swipememo.viewer.fragments.todo.view.TodoViewImpl;
 
 import java.text.ParsePosition;
@@ -219,7 +219,7 @@ public class TodoControllerFragment extends Fragment implements TodoController {
 
     //bottom 아이템을 이제 날짜에 종속시키는데 데이터 부분입니다.
     @Override
-    public void register_todo(int no) throws ConcurrentModificationException {
+    public void register_todo(long no) throws ConcurrentModificationException {
         //날짜 데이트가 있고 올리려는 날짜가 과거가 아닐 시
         if (!compare_date(cal.getTime()).equals("past")) {
             Todo pop_todo = dbHelper.readATodoByNo(no);
@@ -255,7 +255,7 @@ public class TodoControllerFragment extends Fragment implements TodoController {
 
     //selectedTodo의 beleong date를 변경하여 소속을 변경하는 함수입니다.
     @Override
-    public void changeBelongDate(int no) {
+    public void changeBelongDate(long no) {
         if (!compare_date(cal.getTime()).equals("past")) {
             SelectedTodo temp_todo = dbHelper.readASelectedTodoByNO(no);
             dbHelper.modifySelectedTodo(temp_todo.getNo(), temp_todo.isDone(), temp_todo.getType(), temp_todo.getContent(), cal.getTime(), temp_todo.getPutDate());
@@ -267,7 +267,7 @@ public class TodoControllerFragment extends Fragment implements TodoController {
     }
 
     @Override
-    public void register_cancle(int no) {
+    public void register_cancle(long no) {
         SelectedTodo sTodo = dbHelper.readASelectedTodoByNO(no);
         Todo todo = modifi_selectedTodo(sTodo);
         dbHelper.createTodo(todo.getType(), todo.getContent(), cal.getTime());
@@ -277,7 +277,7 @@ public class TodoControllerFragment extends Fragment implements TodoController {
 
     //드래깅한 아이템을 삭제하는 함수
     @Override
-    public void deleteTodo(String type, int no) {
+    public void deleteTodo(String type, long no) {
        if(type.equals("Register Todo")){
            dbHelper.deleteSelectedTodo(no);
        }else if(type.equals("Todo"))

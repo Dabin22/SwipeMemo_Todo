@@ -4,20 +4,19 @@ import com.swipememo.swipememo.viewer.fragments.todo.adapter.RegisteredAdapter;
 import com.swipememo.swipememo.viewer.fragments.todo.adapter.UnRegisterAdapter;
 
 import java.util.Calendar;
-import java.util.Date;
 
 /**
  * Created by Dabin on 2016-11-27.
  */
 
 public interface TodoController {
-    void register_todo(int no);
+    void register_todo(long no);
 
     void stoppingMoveDate();
 
-    void changeBelongDate(int no);
+    void changeBelongDate(long no);
 
-    void register_cancle(int pickedIndex);
+    void register_cancle(long no);
 
     UnRegisterAdapter getUnregisterAdapter();
 
@@ -29,5 +28,5 @@ public interface TodoController {
 
     void draggingMoveDate(int id);
 
-    void deleteTodo(String type,int no);
+    void deleteTodo(String type,long no);
 }

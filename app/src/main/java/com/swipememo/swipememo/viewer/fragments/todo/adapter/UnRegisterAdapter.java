@@ -37,7 +37,6 @@ public class UnRegisterAdapter extends RealmRecyclerViewAdapter<Todo, UnRegister
     public UnRegisterAdapter(@NonNull Context context, @Nullable OrderedRealmCollection<Todo> data, boolean autoUpdate, TodoDragListener dragListener) {
         super(context, data, autoUpdate);
         this.context = context;
-        //TODO Adapter에 NotifyItemChanged가 필요함 (또는 NotifyItemRemoved), 소스코드 http://stackoverflow.com/questions/28995380/best-practices-to-use-realm-with-a-recycler-view
         datas = data;
         this.dragListener = dragListener;
         longClickListener = new TodoLongClickListener();
@@ -46,7 +45,6 @@ public class UnRegisterAdapter extends RealmRecyclerViewAdapter<Todo, UnRegister
     @Override
     public UnRegisterAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_todo_before_register,parent,false);
-
         return new ViewHolder(view);
     }
 
@@ -82,5 +80,6 @@ public class UnRegisterAdapter extends RealmRecyclerViewAdapter<Todo, UnRegister
             itemView.setOnDragListener(dragListener);
             itemView.setOnLongClickListener(longClickListener);
         }
+
     }
 }

@@ -55,7 +55,6 @@ public class SlideWithMenu extends FrameLayout {
                     getSlideableView().animate().translationX(-1*getSlideableView().getWidth()).setDuration(BASIC_ANIMATION_DURATION).start();
                     getMenu().animate().alpha(0).x(getSlideableView().getX()+getSlideableView().getWidth()).setDuration(0).start();
                     getMenu().animate().alpha(1.0f).setDuration(200).start();
-
                 }else{
                     getSlideableView().animate().translationX(0.0f).setDuration(BASIC_ANIMATION_DURATION).start();
                     getMenu().animate().translationX(0.0f).setDuration(0).start();
