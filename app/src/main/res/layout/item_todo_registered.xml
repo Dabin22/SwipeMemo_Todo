@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.swipememo.swipememo.customviews.SlideWithMenu
+<com.swipememo.swipememo.customviews.ItemContainer
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="wrap_content"
     android:layout_width="match_parent">
-    <Button
+    <com.swipememo.swipememo.customviews.MenuView
         android:id="@+id/todoItem_registered_delete"
         android:layout_width="@dimen/todoItem_registered_btn_trash_dimen"
         android:layout_height="@dimen/todoItem_registered_btn_trash_dimen"
-        android:layout_gravity="center"
+        android:layout_marginLeft="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginStart="50dp"
+        android:layout_gravity="center|end"
         android:background="@drawable/icon_trash"/>
-    <android.support.v7.widget.CardView
+    <com.swipememo.swipememo.customviews.FlingCardView
         app:cardCornerRadius="@dimen/memoItem_cardRadius"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        >
-        <com.swipememo.swipememo.customviews.SlideOutTextView
+        android:layout_margin="8dp">
+        <LinearLayout
             android:id="@+id/todoitem_registered_slide"
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -26,14 +29,13 @@
                 android:id="@+id/todoItem_registered_checkbox"
                 android:layout_width="@dimen/todoItem_default_item_width"
                 android:layout_height="@dimen/todoItem_default_item_height"
-                android:layout_margin="@dimen/todoItem_margin"
-                />
+                android:layout_margin="@dimen/todoItem_margin" />
             <TextView
                 android:id="@+id/todoItem_registered_text"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:layout_margin="@dimen/todoItem_margin"/>
-        </com.swipememo.swipememo.customviews.SlideOutTextView>
-    </android.support.v7.widget.CardView>
-</com.swipememo.swipememo.customviews.SlideWithMenu>
+                android:layout_margin="@dimen/todoItem_margin" />
+        </LinearLayout>
+    </com.swipememo.swipememo.customviews.FlingCardView>
+</com.swipememo.swipememo.customviews.ItemContainer>

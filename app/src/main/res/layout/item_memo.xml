@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.swipememo.swipememo.customviews.SlideWithMenu
+<com.swipememo.swipememo.customviews.ItemContainer
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="wrap_content"
@@ -73,4 +73,4 @@
                 android:ellipsize="end" />
         </LinearLayout>
     </android.support.v7.widget.CardView>
-</com.swipememo.swipememo.customviews.SlideWithMenu>
+</com.swipememo.swipememo.customviews.ItemContainer>
