@@ -5,7 +5,7 @@ import android.view.DragEvent;
 import android.view.View;
 
 import com.swipememo.swipememo.R;
-import com.swipememo.swipememo.model.types.TodoViewType;
+import com.swipememo.swipememo.model.types.TodoViewTag;
 import com.swipememo.swipememo.viewer.fragments.todo.controller.TodoController;
 
 import java.util.ConcurrentModificationException;
@@ -31,18 +31,20 @@ public class TodoDragListener implements View.OnDragListener {
     public boolean onDrag(View view, DragEvent dragEvent) throws ConcurrentModificationException {
 
         view_dragging = (View) dragEvent.getLocalState();
-        pickedType = ((TodoViewType) view_dragging.getTag()).getType();
-        pickedIndex = ((TodoViewType) view_dragging.getTag()).getNo();
+        pickedType = ((TodoViewTag) view_dragging.getTag()).getType();
+        pickedIndex = ((TodoViewTag) view_dragging.getTag()).getNo();
         switch (dragEvent.getAction()) {
             case DragEvent.ACTION_DRAG_STARTED:
-
+                Log.e("tag","drag start");
                 break;
             case DragEvent.ACTION_DRAG_ENTERED:
+                Log.e("Tag",""+view.getId());
                 if (view.getId() == R.id.btn_todo_before || view.getId() == R.id.btn_todo_next) {
+                    Log.e("tag","enter the button");
                     controller.draggingMoveDate(view.getId());
                 } else {
                     if (view.getTag() != null) {
-                        targetType = ((TodoViewType) view.getTag()).getType();
+                        targetType = ((TodoViewTag) view.getTag()).getType();
                     }
 
                 }
@@ -54,17 +56,17 @@ public class TodoDragListener implements View.OnDragListener {
                 break;
             case DragEvent.ACTION_DROP:
                 controller.stoppingMoveDate();
-                if (pickedType.equals("BeforeTodo")) {
+                if (pickedType.equals(TodoViewTag.TODO)) {
 
-                    if (targetType.equals("Today") || targetType.equals("Today_list")) {
+                    if (targetType.equals(TodoViewTag.SELECTED_TODO) || targetType.equals(TodoViewTag.REGISTERLIST)) {
                         Log.e("tag", "type is = " + pickedType + ", indext = " + pickedIndex);
                         controller.register_todo(pickedIndex);
                     }
 
-                } else if (pickedType.equals("Today")) {
-                    if (targetType.equals("Today") || targetType.equals("Today_list")) {
+                } else if (pickedType.equals(TodoViewTag.SELECTED_TODO)) {
+                    if (targetType.equals(TodoViewTag.SELECTED_TODO) || targetType.equals(TodoViewTag.REGISTERLIST)) {
                         controller.changeBelongDate(pickedIndex);
-                    } else if (targetType.equals("Bottom")) {
+                    } else if (targetType.equals(TodoViewTag.BEFORE_REGISTERLIST) || targetType.equals(TodoViewTag.TODO)) {
                         controller.register_cancle(pickedIndex);
                     }
                 }
@@ -75,6 +77,7 @@ public class TodoDragListener implements View.OnDragListener {
                 view_dragging.post(new Runnable() {
                     @Override
                     public void run() {
+                        Log.e("tag","view visible");
                         view_dragging.setVisibility(View.VISIBLE);
                     }
                 });

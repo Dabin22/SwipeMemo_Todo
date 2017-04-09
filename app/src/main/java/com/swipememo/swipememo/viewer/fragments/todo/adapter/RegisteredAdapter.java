@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.swipememo.swipememo.R;
 import com.swipememo.swipememo.customviews.ItemContainer;
 import com.swipememo.swipememo.model.types.SelectedTodo;
-import com.swipememo.swipememo.model.types.TodoViewType;
+import com.swipememo.swipememo.model.types.TodoViewTag;
 import com.swipememo.swipememo.viewer.fragments.todo.controller.TodoController;
 import com.swipememo.swipememo.viewer.fragments.todo.listener.TodoDragListener;
 import com.swipememo.swipememo.viewer.fragments.todo.listener.TodoLongClickListener;
@@ -65,9 +65,9 @@ public class RegisteredAdapter extends RealmRecyclerViewAdapter<SelectedTodo, Re
 
 
 
-        TodoViewType viewType = new TodoViewType();
+        TodoViewTag viewType = new TodoViewTag();
         this.itemView = holder.itemView;
-        viewType.setType(TodoViewType.SELECTED_TODO);
+        viewType.setType(TodoViewTag.SELECTED_TODO);
         viewType.setNo(todo.getNo());
         holder.itemView.setTag(viewType);
     }

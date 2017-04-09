@@ -82,7 +82,7 @@ public class TodoControllerFragment extends Fragment implements TodoController {
         dbHelper = RealmHelper.getInstance();
         dbHelper.dbInit(this);
 
-
+        dragListener = new TodoDragListener(this);
         todoView = new TodoViewImpl(this);
 
 
@@ -96,7 +96,11 @@ public class TodoControllerFragment extends Fragment implements TodoController {
     private void init() {
         registeredAdapters = new HashMap<>();
         init_dateData();
-        dragListener = new TodoDragListener(this);
+//        for(int i=0; i<3; i++){
+//            dbHelper.writeSelectedTodo(i,Todo.REPEAT,"나의 "+i,cal.getTime(),cal.getTime());
+//            dbHelper.createTodo(Todo.REPEAT,i+"번째",cal.getTime());
+//        }
+
         Log.e("time", cal.getTime().toString());
 
     }
@@ -110,15 +114,15 @@ public class TodoControllerFragment extends Fragment implements TodoController {
     }
 
 
-
-    private com.swipememo.swipememo.model.types.Todo modifi_selectedTodo(SelectedTodo todo) {
-        com.swipememo.swipememo.model.types.Todo temp_todo = new com.swipememo.swipememo.model.types.Todo();
+    private Todo modifi_selectedTodo(SelectedTodo todo) {
+        Todo temp_todo = new Todo();
         temp_todo.setCreateDate(today);
         temp_todo.setType(ONCE);
         temp_todo.setContent(todo.getContent());
         temp_todo.setDone(false);
         return temp_todo;
     }
+
     //시,분,초를 모두 0으로 초기화 해주는 함수입니다.
     public static Date modifi_customDate(Date date) {
         SimpleDateFormat date_format = new SimpleDateFormat("yyyy-MM-d");
@@ -129,7 +133,7 @@ public class TodoControllerFragment extends Fragment implements TodoController {
 
     @Override
     public UnRegisterAdapter getUnregisterAdapter() {
-        return new UnRegisterAdapter(getContext(), dbHelper.readAllTodo().sort("no", Sort.DESCENDING), true, null);
+        return new UnRegisterAdapter(getContext(), dbHelper.readAllTodo().sort("no", Sort.DESCENDING), true, dragListener);
     }
 
     @Override
@@ -137,7 +141,7 @@ public class TodoControllerFragment extends Fragment implements TodoController {
         if (registeredAdapters.containsKey(cal)) {
             return registeredAdapters.get(cal);
         } else {
-            registeredAdapters.put(cal, new RegisteredAdapter(getContext(), dbHelper.readSelectedTodoByBelongDate(cal.getTime()).sort("no", Sort.DESCENDING), true, null, this));
+            registeredAdapters.put(cal, new RegisteredAdapter(getContext(), dbHelper.readSelectedTodoByBelongDate(cal.getTime()).sort("no", Sort.DESCENDING), true, dragListener, this));
         }
         return registeredAdapters.get(cal);
     }
@@ -150,6 +154,10 @@ public class TodoControllerFragment extends Fragment implements TodoController {
         todoView.setCalendar(cal);
     }
 
+    @Override
+    public TodoDragListener getDragListener() {
+        return dragListener;
+    }
 
     //버튼을 눌러서 날짜를 변경하고 화면에 변경하는 함수입니다.
     @Override
@@ -195,8 +203,6 @@ public class TodoControllerFragment extends Fragment implements TodoController {
     public void stoppingMoveDate() {
         alive = false;
     }
-
-
 
 
     @Override
@@ -258,7 +264,8 @@ public class TodoControllerFragment extends Fragment implements TodoController {
     public void changeBelongDate(long no) {
         if (!compare_date(cal.getTime()).equals("past")) {
             SelectedTodo temp_todo = dbHelper.readASelectedTodoByNO(no);
-            dbHelper.modifySelectedTodo(temp_todo.getNo(), temp_todo.isDone(), temp_todo.getType(), temp_todo.getContent(), cal.getTime(), temp_todo.getPutDate());
+            if (temp_todo.getBelongDate().compareTo(cal.getTime()) != 0)
+                dbHelper.modifySelectedTodo(temp_todo.getNo(), temp_todo.isDone(), temp_todo.getType(), temp_todo.getContent(), cal.getTime(), temp_todo.getPutDate());
         } else {
             Toast.makeText(getContext(), "Cannot add on past", Toast.LENGTH_SHORT).show();
         }
@@ -278,9 +285,9 @@ public class TodoControllerFragment extends Fragment implements TodoController {
     //드래깅한 아이템을 삭제하는 함수
     @Override
     public void deleteTodo(String type, long no) {
-       if(type.equals("Register Todo")){
-           dbHelper.deleteSelectedTodo(no);
-       }else if(type.equals("Todo"))
-           dbHelper.deleteTodo(no);
+        if (type.equals("Register Todo")) {
+            dbHelper.deleteSelectedTodo(no);
+        } else if (type.equals("Todo"))
+            dbHelper.deleteTodo(no);
     }
 }

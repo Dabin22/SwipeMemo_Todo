@@ -12,8 +12,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.swipememo.swipememo.R;
+import com.swipememo.swipememo.customviews.ItemContainer;
 import com.swipememo.swipememo.model.types.Todo;
-import com.swipememo.swipememo.model.types.TodoViewType;
+import com.swipememo.swipememo.model.types.TodoViewTag;
 import com.swipememo.swipememo.viewer.fragments.todo.listener.TodoDragListener;
 import com.swipememo.swipememo.viewer.fragments.todo.listener.TodoLongClickListener;
 
@@ -44,7 +45,8 @@ public class UnRegisterAdapter extends RealmRecyclerViewAdapter<Todo, UnRegister
 
     @Override
     public UnRegisterAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_todo_before_register,parent,false);
+        ItemContainer view = (ItemContainer)LayoutInflater.from(context).inflate(R.layout.item_todo_before_register,parent,false);
+        view.reset();
         return new ViewHolder(view);
     }
 
@@ -54,8 +56,8 @@ public class UnRegisterAdapter extends RealmRecyclerViewAdapter<Todo, UnRegister
         Log.e("tag",todo.getContent()+"");
         holder.tv_before_todoItem.setText(todo.getContent());
 
-        TodoViewType viewType = new TodoViewType();
-        viewType.setType(TodoViewType.TODO);
+        TodoViewTag viewType = new TodoViewTag();
+        viewType.setType(TodoViewTag.TODO);
         viewType.setNo(todo.getNo());
         holder.itemView.setTag(viewType);
 
@@ -78,7 +80,7 @@ public class UnRegisterAdapter extends RealmRecyclerViewAdapter<Todo, UnRegister
             tv_before_todoItem = (TextView) itemView.findViewById(R.id.todoItem_before_text);
             btn_befroe_flingable = (Button) itemView.findViewById(R.id.todoItem_before_flingable);
             itemView.setOnDragListener(dragListener);
-            itemView.setOnLongClickListener(longClickListener);
+
         }
 
     }

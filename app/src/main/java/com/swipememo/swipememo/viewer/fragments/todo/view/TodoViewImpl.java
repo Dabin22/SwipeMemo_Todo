@@ -12,6 +12,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.swipememo.swipememo.R;
+import com.swipememo.swipememo.model.types.TodoViewTag;
 import com.swipememo.swipememo.viewer.fragments.todo.adapter.RegisteredAdapter;
 import com.swipememo.swipememo.viewer.fragments.todo.adapter.UnRegisterAdapter;
 import com.swipememo.swipememo.viewer.fragments.todo.controller.TodoControllerFragment;
@@ -61,12 +62,20 @@ public class TodoViewImpl implements TodoView, View.OnClickListener, DatePickerD
         View view = ((LayoutInflater) container.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE))
                 .inflate(R.layout.fragment_todoviewer, container, false);
         this.container = container;
-
-
+        TodoViewTag rgTodoTag = new TodoViewTag();
+        rgTodoTag.setType(TodoViewTag.REGISTERLIST);
+        TodoViewTag urgTodoTag = new TodoViewTag();
+        urgTodoTag.setType(TodoViewTag.BEFORE_REGISTERLIST);
         btn_todo_before = (Button) view.findViewById(R.id.btn_todo_before);
+        btn_todo_before.setOnDragListener(controller.getDragListener());
         btn_todo_next = (Button) view.findViewById(R.id.btn_todo_next);
+        btn_todo_next.setOnDragListener(controller.getDragListener());
         unRegister_todoList = (RecyclerView) view.findViewById(R.id.unRegister_todoList);
         registered_todoList = (RecyclerView) view.findViewById(R.id.registered_todoList);
+        unRegister_todoList.setTag(urgTodoTag);
+        registered_todoList.setTag(rgTodoTag);
+        unRegister_todoList.setOnDragListener(controller.getDragListener());
+        registered_todoList.setOnDragListener(controller.getDragListener());
         sp_todoType = (Spinner) view.findViewById(R.id.sp_todoType);
         bg_date = (TextView) view.findViewById(R.id.bg_date);
         tv_todo_calendar = (TextView) view.findViewById(R.id.tv_todo_calendar);

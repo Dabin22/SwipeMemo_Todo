@@ -2,6 +2,7 @@ package com.swipememo.swipememo.viewer.fragments.todo.controller;
 
 import com.swipememo.swipememo.viewer.fragments.todo.adapter.RegisteredAdapter;
 import com.swipememo.swipememo.viewer.fragments.todo.adapter.UnRegisterAdapter;
+import com.swipememo.swipememo.viewer.fragments.todo.listener.TodoDragListener;
 
 import java.util.Calendar;
 
@@ -29,4 +30,6 @@ public interface TodoController {
     void draggingMoveDate(int id);
 
     void deleteTodo(String type,long no);
+
+    TodoDragListener getDragListener();
 }

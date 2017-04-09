@@ -1,6 +1,5 @@
 package com.swipememo.swipememo.viewer.fragments.todo.listener;
 
-import android.os.Build;
 import android.util.Log;
 import android.view.View;
 
@@ -16,11 +15,11 @@ public class TodoLongClickListener implements View.OnLongClickListener {
         if(clickable) {
             View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(
                     view);
-            if(Build.VERSION.SDK_INT >23){
-                view.startDragAndDrop(null,shadowBuilder,view,0);
-            } else{
+//            if(Build.VERSION.SDK_INT >23){
+//                view.startDragAndDrop(null,shadowBuilder,view,0);
+//            } else{
                 view.startDrag(null, shadowBuilder, view, 0);
-            }
+//            }
             view.setVisibility(View.INVISIBLE);
             return true;
         }else{
