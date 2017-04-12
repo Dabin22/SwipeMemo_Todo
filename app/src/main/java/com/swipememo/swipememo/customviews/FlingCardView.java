@@ -44,8 +44,8 @@ public class FlingCardView extends CardView {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         if(initial){
-            x = getLeft()+getLeftPaddingOffset();
-            y = getTop()+getTopPaddingOffset();
+            x = getX();
+            y = getY();
             initial = false;
         }
     }
@@ -60,6 +60,7 @@ public class FlingCardView extends CardView {
         for(FlingCardViewListener listener : listeners) {
             listener.onOpen(FlingCardView.this);
         }
+        x = getX();
         animate().x(x+xBy).setDuration(duration).start();
         open= true;
         requestLayout();
