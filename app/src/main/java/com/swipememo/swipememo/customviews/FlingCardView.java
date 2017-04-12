@@ -44,8 +44,8 @@ public class FlingCardView extends CardView {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         if(initial){
-            x = getX();
-            y = getY();
+            x = getLeft()+getLeftPaddingOffset();
+            y = getTop()+getTopPaddingOffset();
             initial = false;
         }
     }
@@ -60,8 +60,9 @@ public class FlingCardView extends CardView {
         for(FlingCardViewListener listener : listeners) {
             listener.onOpen(FlingCardView.this);
         }
-        animate().xBy(xBy).setDuration(duration).start();
+        animate().x(x+xBy).setDuration(duration).start();
         open= true;
+        requestLayout();
     }
 
     public void close(){
@@ -70,6 +71,7 @@ public class FlingCardView extends CardView {
         }
         animate().x(x).setDuration(duration).start();
         open = false;
+        requestLayout();
     }
     public void addFlingCardViewListener(FlingCardViewListener flingCardViewListener){
         listeners.add(flingCardViewListener);
@@ -138,8 +140,7 @@ public class FlingCardView extends CardView {
         for(FlingCardViewListener listener : listeners) {
             listener.onFling(FlingCardView.this, velocityX, velocityY);
         }
-
-        if(velocityX>50){
+        if(velocityX>50 && velocityY < 10){
             if(!open)
                 return;
             close();
