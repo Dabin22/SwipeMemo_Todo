@@ -10,7 +10,7 @@ import android.widget.Button;
  * Created by DoDo on 2017-04-09.
  */
 
-public class MenuView extends Button {
+public class MenuView extends android.support.v7.widget.AppCompatButton {
     public MenuView(Context context) {
         this(context, null);
     }
@@ -23,10 +23,10 @@ public class MenuView extends Button {
         super(context, attrs, defStyleAttr);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public MenuView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-    }
+//    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+//    public MenuView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+//        super(context, attrs, defStyleAttr, defStyleRes);
+//    }
 
     @Override
     public void setVisibility(int visibility) {
