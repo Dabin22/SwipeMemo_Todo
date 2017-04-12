@@ -97,10 +97,13 @@ public class TodoControllerFragment extends Fragment implements TodoController {
     private void init() {
         registeredAdapters = new HashMap<>();
         init_dateData();
-//        for(int i=0; i<3; i++){
-//            dbHelper.writeSelectedTodo(i,Todo.REPEAT,"나의 "+i,cal.getTime(),cal.getTime());
-//            dbHelper.createTodo(Todo.REPEAT,i+"번째",cal.getTime());
-//        }
+        if (dbHelper.readAllTodo().size() == 0 && dbHelper.readSelectedTodoByBelongDate(cal.getTime()).size() == 0) {
+            for (int i = 0; i < 3; i++) {
+                dbHelper.writeSelectedTodo(Todo.REPEAT, "나의 " + i, cal.getTime(), cal.getTime());
+                dbHelper.createTodo(Todo.REPEAT, i + "번째", cal.getTime());
+            }
+
+        }
 
         Log.e("time", cal.getTime().toString());
 
@@ -243,8 +246,8 @@ public class TodoControllerFragment extends Fragment implements TodoController {
     private void writeTodo(Todo pop_todo, Date selcted_day) {
         SelectedTodo sTodo = null;
         sTodo = modifi_todo(pop_todo, selcted_day);
-
-        dbHelper.writeSelectedTodo( sTodo.getType(), sTodo.getContent(), selcted_day, selcted_day);
+        dbHelper.deleteTodo(pop_todo.getNo());
+        dbHelper.writeSelectedTodo(sTodo.getType(), sTodo.getContent(), selcted_day, selcted_day);
 
     }
 
