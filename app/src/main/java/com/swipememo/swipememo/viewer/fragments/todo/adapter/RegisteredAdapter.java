@@ -69,7 +69,7 @@ public class RegisteredAdapter extends RealmRecyclerViewAdapter<SelectedTodo, Re
         final SelectedTodo todo = datas.get(position);
         viewList.put(todo.getNo(),(ItemContainer)holder.itemView);
         tvList.put(todo.getNo(),holder.tv_unput_todo);
-        holder.tv_unput_todo.setText(todo.getContent());
+        holder.tv_unput_todo.setText(" "+todo.getContent()+" ");
         holder.ck_todo_done.setTag(todo);
         if(todo.isDone()){
             holder.ck_todo_done.setChecked(true);
