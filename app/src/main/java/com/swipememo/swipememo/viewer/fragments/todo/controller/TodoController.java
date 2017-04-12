@@ -1,5 +1,7 @@
 package com.swipememo.swipememo.viewer.fragments.todo.controller;
 
+import com.swipememo.swipememo.model.types.SelectedTodo;
+import com.swipememo.swipememo.model.types.Todo;
 import com.swipememo.swipememo.viewer.fragments.todo.adapter.RegisteredAdapter;
 import com.swipememo.swipememo.viewer.fragments.todo.adapter.UnRegisterAdapter;
 import com.swipememo.swipememo.viewer.fragments.todo.listener.TodoDragListener;
@@ -30,6 +32,8 @@ public interface TodoController {
     void draggingMoveDate(int id);
 
     void deleteTodo(String type,long no);
+
+    void setDone(SelectedTodo todo, boolean done);
 
     TodoDragListener getDragListener();
 }
