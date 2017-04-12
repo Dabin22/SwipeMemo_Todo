@@ -40,6 +40,8 @@ public class FlingCardView extends CardView {
             }
             @Override
             public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+                if(Math.abs(velocityX)<150)
+                    return false;
                 for(FlingCardViewListener listener : listeners) {
                     listener.onFling(FlingCardView.this, velocityX, velocityY);
                 }
