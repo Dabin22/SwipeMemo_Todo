@@ -1,13 +1,16 @@
 package com.swipememo.swipememo.customviews;
 
 import android.content.Context;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.regex.Matcher;
 
 
 /**
@@ -16,16 +19,17 @@ import java.util.ArrayList;
 
 public class FlingCardView extends CardView {
 
-    private int duration = 300;
-    ArrayList<FlingCardViewListener> listeners = new ArrayList<>();
+    private final int ANIM_DURATION = 300;
+    private final int FLINGABLE = 0x000001;
 
+    ArrayList<FlingCardViewListener> listeners = new ArrayList<>();
+    MyHandler myHandler = new MyHandler();
     private boolean open = false;
     private boolean initial = true;
     private boolean clickable = true;
-    private float x  = 0;
-    private float xBy = -300;
-    private float y = 0;
-    private float yBy = 300;
+    private boolean unflingable = false;
+    private float xBy = -300, yBy = -300;
+    private float x=0 ,y = 0;
     private final int LONG_PRESS = 0x00300;
     private boolean mInLongPress = false;
 
@@ -43,11 +47,6 @@ public class FlingCardView extends CardView {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        if(initial){
-            x = getX();
-            y = getY();
-            initial = false;
-        }
     }
     public void setxBy(float xBy){
         this.xBy = xBy;
@@ -60,19 +59,23 @@ public class FlingCardView extends CardView {
         for(FlingCardViewListener listener : listeners) {
             listener.onOpen(FlingCardView.this);
         }
+        if(getX()< 0)
+            return;
         x = getX();
-        animate().x(x+xBy).setDuration(duration).start();
+        y = getY();
+        animate().xBy(xBy).setDuration(ANIM_DURATION).start();
+        myHandler.sendEmptyMessageAtTime(FLINGABLE, Calendar.getInstance().getTimeInMillis()+ANIM_DURATION);
         open= true;
-        requestLayout();
     }
 
     public void close(){
         for(FlingCardViewListener listener : listeners) {
             listener.onClose(FlingCardView.this);
         }
-        animate().x(x).setDuration(duration).start();
+        if(getX()>0)
+            return;
+        animate().x(x).setDuration(ANIM_DURATION).start();
         open = false;
-        requestLayout();
     }
     public void addFlingCardViewListener(FlingCardViewListener flingCardViewListener){
         listeners.add(flingCardViewListener);
@@ -137,11 +140,12 @@ public class FlingCardView extends CardView {
     }
 
     public void onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY){
-
+        if(Math.abs(velocityY) > 5)
+            return;
         for(FlingCardViewListener listener : listeners) {
             listener.onFling(FlingCardView.this, velocityX, velocityY);
         }
-        if(velocityX>50 && velocityY < 10){
+        if(velocityX>50){
             if(!open)
                 return;
             close();
@@ -161,4 +165,15 @@ public class FlingCardView extends CardView {
         void onOpen(FlingCardView view);
         void onClose(FlingCardView view);
     }
+
+    class MyHandler extends Handler{
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if(msg.what == FLINGABLE){
+                unflingable = false;
+            }
+        }
+    }
+
 }
