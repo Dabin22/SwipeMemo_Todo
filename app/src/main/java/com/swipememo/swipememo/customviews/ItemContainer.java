@@ -121,7 +121,6 @@ public class ItemContainer extends FrameLayout implements FlingCardView.FlingCar
     }
     public void reset(){
         getContent().close();
-        getMenu().setVisibility(INVISIBLE);
     }
 
     @Override
@@ -142,12 +141,12 @@ public class ItemContainer extends FrameLayout implements FlingCardView.FlingCar
 
     @Override
     public void onFling(FlingCardView view, float velocityX, float velocityY) {
-        Log.e("ItemContainer","FlingCardViewListener trigger onFLing");
-        if(velocityX<0){
-            getMenu().setVisibility(VISIBLE);
-        }else{
-            getMenu().setVisibility(GONE);
-        }
+//        Log.e("ItemContainer","FlingCardViewListener trigger onFLing");
+//        if(velocityX<0){
+//            getMenu().setVisibility(VISIBLE);
+//        }else{
+//            getMenu().setVisibility(GONE);
+//        }
     }
 
     @Override
