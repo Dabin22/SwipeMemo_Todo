@@ -31,6 +31,7 @@
                 android:layout_height="@dimen/todoItem_default_item_height"
                 android:layout_margin="@dimen/todoItem_margin" />
             <TextView
+                android:gravity="center_vertical"
                 android:id="@+id/todoItem_registered_text"
                 android:layout_width="0dp"
                 android:layout_weight="1"

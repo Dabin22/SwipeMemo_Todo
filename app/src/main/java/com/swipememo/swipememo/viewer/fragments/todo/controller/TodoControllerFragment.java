@@ -294,4 +294,10 @@ public class TodoControllerFragment extends Fragment implements TodoController {
         } else if (type.equals("Todo"))
             dbHelper.deleteTodo(no);
     }
+
+    @Override
+    public void setDone(SelectedTodo todo,boolean done) {
+        Log.e("tag","dbhelper setDone = " + todo.isDone());
+        dbHelper.modifySelectedTodo(todo.getNo(),done,todo.getType(),todo.getContent(),todo.getBelongDate(),todo.getPutDate());
+    }
 }
