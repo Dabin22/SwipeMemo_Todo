@@ -22,25 +22,4 @@ public class MenuView extends android.support.v7.widget.AppCompatButton {
     public MenuView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
-
-//    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-//    public MenuView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-//        super(context, attrs, defStyleAttr, defStyleRes);
-//    }
-
-    @Override
-    public void setVisibility(int visibility) {
-        switch (visibility){
-            case VISIBLE:
-
-                break;
-            case INVISIBLE:
-
-                break;
-            case GONE:
-
-                break;
-        }
-        super.setVisibility(visibility);
-    }
 }

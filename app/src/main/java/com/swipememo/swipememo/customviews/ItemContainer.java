@@ -14,13 +14,12 @@ import android.widget.FrameLayout;
  * Created by DoDo on 2017-03-20.
  */
 
-public class ItemContainer extends FrameLayout implements FlingCardView.FlingCardViewListener {
+public class ItemContainer extends FrameLayout{
     private String TAG ="ItemContainer";
 
     private GestureDetector gd;
     private MenuView menu = null;
     private FlingCardView content = null;
-    private boolean initial = true;
     private boolean clickable = true;
     public ItemContainer(Context context) {
         this(context,null);
@@ -32,6 +31,15 @@ public class ItemContainer extends FrameLayout implements FlingCardView.FlingCar
 
     public ItemContainer(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        init();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public ItemContainer(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
+        init();
+    }
+    private void init(){
         gd = new GestureDetector(getContext(),new GestureDetector.SimpleOnGestureListener(){
             @Override
             public boolean onDown(MotionEvent e) {
@@ -53,12 +61,8 @@ public class ItemContainer extends FrameLayout implements FlingCardView.FlingCar
                 }
             }
         });
-    }
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public ItemContainer(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-    }
 
+    }
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
@@ -70,19 +74,22 @@ public class ItemContainer extends FrameLayout implements FlingCardView.FlingCar
     }
 
     @Override
+    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+        super.onLayout(changed, left, top, right, bottom);
+    }
+
+    @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        if(initial){
-            getContent().addFlingCardViewListener(this);
-            initial = false;
-        }
     }
+
     public void setOnClickMenuButton(View.OnClickListener listener){
         getMenu().setOnClickListener(listener);
     }
     public void addOnFlingCardViewListener(FlingCardView.FlingCardViewListener flingCardViewListener){
         getContent().addFlingCardViewListener(flingCardViewListener);
     }
+
     public FlingCardView getContent(){
         if(content != null)
             return content;
@@ -109,31 +116,13 @@ public class ItemContainer extends FrameLayout implements FlingCardView.FlingCar
     }
 
     @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        return gd.onTouchEvent(event);
+    }
+
+    @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         gd.onTouchEvent(ev);
         return super.onInterceptTouchEvent(ev);
-    }
-
-    @Override
-    public void onFling(FlingCardView view, float velocityX, float velocityY) {
-
-    }
-
-    @Override
-    public void afterFling(FlingCardView view, float velocityX, float velocityY) {
-
-    }
-
-    @Override
-    public void onOpen(FlingCardView view) {
-
-    }
-
-    @Override
-    public void onClose(FlingCardView view) {
-
-    }
-    public void setClickable(boolean clickable){
-        this.clickable = clickable;
     }
 }
