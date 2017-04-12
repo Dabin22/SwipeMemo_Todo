@@ -5,6 +5,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 
@@ -56,6 +58,8 @@ public class FlingCardView extends CardView {
     }
     public boolean isOpen(){return open;}
     public void open(){
+        if(open)
+            return;
         for(FlingCardViewListener listener : listeners) {
             listener.onOpen(FlingCardView.this);
         }
@@ -69,6 +73,8 @@ public class FlingCardView extends CardView {
     }
 
     public void close(){
+        if(!open)
+            return;
         for(FlingCardViewListener listener : listeners) {
             listener.onClose(FlingCardView.this);
         }
@@ -103,13 +109,13 @@ public class FlingCardView extends CardView {
     private VelocityTracker mVelocityTracker = null;
     private int mMaximumFlingVelocity = 1000;
     private int mMinimumFlingVelocity = 50;
-
+    private int downX = 0;
+    private int downY = 0;
     private void verifyFling(MotionEvent event){
         if (mVelocityTracker == null) {
             mVelocityTracker = VelocityTracker.obtain();
         }
         mVelocityTracker.addMovement(event);
-        MotionEvent mCurrentDownEvent = null;
         switch (event.getAction()){
             case MotionEvent.ACTION_DOWN:
                 if (mCurrentDownEvent != null) {
@@ -118,21 +124,25 @@ public class FlingCardView extends CardView {
                 mCurrentDownEvent = MotionEvent.obtain(event);
                 break;
             case MotionEvent.ACTION_MOVE:
-                final VelocityTracker velocityTracker = mVelocityTracker;
-                final int pointerId = event.getPointerId(0);
-                velocityTracker.computeCurrentVelocity(1000, mMaximumFlingVelocity);
-                final float velocityY = velocityTracker.getYVelocity(pointerId);
-                final float velocityX = velocityTracker.getXVelocity(pointerId);
-                if ((Math.abs(velocityY) > mMinimumFlingVelocity)
-                        || (Math.abs(velocityX) > mMinimumFlingVelocity)){
-                    onFling(mCurrentDownEvent, event, velocityX, velocityY);
+                if(Math.abs(mCurrentDownEvent.getX() - event.getX())>15) {
+                    final VelocityTracker velocityTracker = mVelocityTracker;
+                    final int pointerId = event.getPointerId(0);
+                    velocityTracker.computeCurrentVelocity(1000, mMaximumFlingVelocity);
+                    final float velocityY = velocityTracker.getYVelocity(pointerId);
+                    final float velocityX = velocityTracker.getXVelocity(pointerId);
+                    Log.e("FlingCardView","velocity x: "+velocityX+" velocity y: " + velocityY);
+                    if ((Math.abs(velocityY) > mMinimumFlingVelocity)
+                            || (Math.abs(velocityX) > mMinimumFlingVelocity)){
+                        onFling(mCurrentDownEvent, event, velocityX, velocityY);
+                    }
+
+                    if (mVelocityTracker != null) {
+                        mVelocityTracker.recycle();
+                        mVelocityTracker = null;
+                    }
                 }
-                break;
+                    break;
             case MotionEvent.ACTION_UP:
-                if (mVelocityTracker != null) {
-                    mVelocityTracker.recycle();
-                    mVelocityTracker = null;
-                }
                 break;
             case MotionEvent.ACTION_CANCEL:
                 break;
@@ -140,18 +150,16 @@ public class FlingCardView extends CardView {
     }
 
     public void onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY){
-        if(Math.abs(velocityY) > 5)
-            return;
+
+        Log.e("FlingCardView","velocity x: "+velocityX+" velocity y: " + velocityY);
+        Log.e("FlingCardView","e1 x: "+e1.getX()+" e2 x: " + e2.getX());
+
         for(FlingCardViewListener listener : listeners) {
             listener.onFling(FlingCardView.this, velocityX, velocityY);
         }
-        if(velocityX>50){
-            if(!open)
-                return;
+        if(velocityX>0){
             close();
         }else{
-            if(open)
-                return;
             open();
         }
         for(FlingCardViewListener listener : listeners) {
