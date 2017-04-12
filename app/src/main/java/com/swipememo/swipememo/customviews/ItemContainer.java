@@ -14,13 +14,16 @@ import android.widget.FrameLayout;
  * Created by DoDo on 2017-03-20.
  */
 
-public class ItemContainer extends FrameLayout{
+public class ItemContainer extends FrameLayout implements FlingCardView.FlingCardViewListener{
     private String TAG ="ItemContainer";
 
     private GestureDetector gd;
     private MenuView menu = null;
     private FlingCardView content = null;
     private boolean clickable = true;
+
+    private boolean initial = true;
+
     public ItemContainer(Context context) {
         this(context,null);
     }
@@ -39,6 +42,7 @@ public class ItemContainer extends FrameLayout{
         super(context, attrs, defStyleAttr, defStyleRes);
         init();
     }
+
     private void init(){
         gd = new GestureDetector(getContext(),new GestureDetector.SimpleOnGestureListener(){
             @Override
@@ -63,6 +67,7 @@ public class ItemContainer extends FrameLayout{
         });
 
     }
+
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
@@ -81,6 +86,10 @@ public class ItemContainer extends FrameLayout{
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        if(initial){
+            getContent().addFlingCardViewListener(this);
+            initial = false;
+        }
     }
 
     public void setOnClickMenuButton(View.OnClickListener listener){
@@ -124,5 +133,35 @@ public class ItemContainer extends FrameLayout{
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         gd.onTouchEvent(ev);
         return super.onInterceptTouchEvent(ev);
+    }
+    public void setClickable(boolean clickable){
+        this.clickable = clickable;
+    }
+
+    //FlingCardViewListener Implements
+
+    @Override
+    public void onFling(FlingCardView view, float velocityX, float velocityY) {
+        Log.e("ItemContainer","FlingCardViewListener trigger onFLing");
+        if(velocityX<0){
+            getMenu().setVisibility(VISIBLE);
+        }else{
+            getMenu().setVisibility(GONE);
+        }
+    }
+
+    @Override
+    public void afterFling(FlingCardView view, float velocityX, float velocityY) {
+
+    }
+
+    @Override
+    public void onOpen(FlingCardView view) {
+
+    }
+
+    @Override
+    public void onClose(FlingCardView view) {
+
     }
 }

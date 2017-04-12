@@ -135,12 +135,11 @@ public class FlingCardView extends CardView {
 
     public void onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY){
 
-        Log.e("FlingCardView","Fling");
         for(FlingCardViewListener listener : listeners) {
             listener.onFling(FlingCardView.this, velocityX, velocityY);
         }
+
         if(velocityX>50){
-            Log.e("FlingCardView","Fling");
             if(!open)
                 return;
             close();
