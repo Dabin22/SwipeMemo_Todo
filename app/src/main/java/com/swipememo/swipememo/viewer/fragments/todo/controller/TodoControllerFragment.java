@@ -1,5 +1,6 @@
 package com.swipememo.swipememo.viewer.fragments.todo.controller;
 
+import android.app.Application;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -79,7 +80,7 @@ public class TodoControllerFragment extends Fragment implements TodoController {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         Realm.init(getContext());
-        dbHelper = RealmHelper.getInstance();
+        dbHelper = RealmHelper.getInstance((Application) getActivity().getApplicationContext());
         dbHelper.dbInit(this);
 
         dragListener = new TodoDragListener(this);
@@ -243,7 +244,7 @@ public class TodoControllerFragment extends Fragment implements TodoController {
         SelectedTodo sTodo = null;
         sTodo = modifi_todo(pop_todo, selcted_day);
 
-        dbHelper.writeSelectedTodo(pop_todo.getNo(), sTodo.getType(), sTodo.getContent(), selcted_day, selcted_day);
+        dbHelper.writeSelectedTodo( sTodo.getType(), sTodo.getContent(), selcted_day, selcted_day);
 
     }
 

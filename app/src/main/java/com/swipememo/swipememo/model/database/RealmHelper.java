@@ -1,5 +1,7 @@
 package com.swipememo.swipememo.model.database;
 
+import android.app.Application;
+
 import com.swipememo.swipememo.model.types.MemoDirectory;
 import com.swipememo.swipememo.model.types.Memo;
 import com.swipememo.swipememo.model.types.SelectedTodo;
@@ -25,7 +27,7 @@ import io.realm.annotations.RealmModule;
 
 public class RealmHelper implements DBHelper {
 
-    private static RealmHelper instance = new RealmHelper();
+    private static RealmHelper instance;
 
     private RealmConfiguration config;
 
@@ -43,7 +45,10 @@ public class RealmHelper implements DBHelper {
         configRealm();
     }
 
-    public static RealmHelper getInstance(){
+    public static RealmHelper getInstance(Application context){
+        Realm.init(context);
+        if(instance == null)
+            instance = new RealmHelper();
         return instance;
     }
     private void configRealm(){
@@ -116,10 +121,18 @@ public class RealmHelper implements DBHelper {
                     temp = swipeRealm.where(Memo.class).max("no");
                     break;
                 case TODO:
-                    temp = swipeRealm.where(Todo.class).max("no");
+                    try {
+                        temp = swipeRealm.where(Todo.class).max("no");
+                    }catch (NullPointerException ne){
+                        temp = 0;
+                    }
                     break;
                 case SELECTED_TODO:
-                    temp = swipeRealm.where(SelectedTodo.class).max("no");
+                    try {
+                        temp = swipeRealm.where(SelectedTodo.class).max("no");
+                    }catch (NullPointerException ne){
+                        temp = 0;
+                    }
                     break;
             }}catch (Exception e){throw  e;}
 
@@ -219,8 +232,8 @@ public class RealmHelper implements DBHelper {
     }
 
     @Override
-    public void writeSelectedTodo(long no, String type, String content, Date belongDate, Date putDate) {
-        swipeRealm.executeTransaction(new SelectedTodoTransaction(CREATE,no,type,content,belongDate,putDate));
+    public void writeSelectedTodo( String type, String content, Date belongDate, Date putDate) {
+        swipeRealm.executeTransaction(new SelectedTodoTransaction(CREATE,type,content,belongDate,putDate));
     }
 
     @Override
@@ -484,9 +497,9 @@ public class RealmHelper implements DBHelper {
 
         private String action = null;
 
-        SelectedTodoTransaction(String action,long no, String type, String content, Date belongDate, Date putDate) {
+        SelectedTodoTransaction(String action,String type, String content, Date belongDate, Date putDate) {
             this.action = action;
-            this.no = getLargestNo(TODO)+1;
+            this.no = getLargestNo(SELECTED_TODO)+1;
             this.type = type;
             this.content = content;
             this.belongDate = belongDate;

@@ -109,6 +109,12 @@ public class ItemContainer extends FrameLayout implements FlingCardView.FlingCar
     }
 
     @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        gd.onTouchEvent(ev);
+        return super.onInterceptTouchEvent(ev);
+    }
+
+    @Override
     public void onFling(FlingCardView view, float velocityX, float velocityY) {
 
     }

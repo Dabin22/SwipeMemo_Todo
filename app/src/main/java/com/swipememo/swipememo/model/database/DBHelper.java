@@ -62,7 +62,7 @@ public interface DBHelper {
     OrderedRealmCollection<Todo> readAllTodo();
 
 
-    void writeSelectedTodo(long no,String type, String content, Date belongDate, Date putDate);
+    void writeSelectedTodo(String type, String content, Date belongDate, Date putDate);
     void modifySelectedTodo(long no, boolean done, String type, String content, Date belongDate, Date putDate);
     void deleteSelectedTodo(long no);
     SelectedTodo readASelectedTodoByNO(long no);
