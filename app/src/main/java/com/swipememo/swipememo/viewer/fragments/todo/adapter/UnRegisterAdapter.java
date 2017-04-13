@@ -34,6 +34,7 @@ public class UnRegisterAdapter extends RealmRecyclerViewAdapter<Todo, UnRegister
     private TodoDragListener dragListener;
     private OrderedRealmCollection<Todo> datas = null;
     private TodoController controller;
+    private ItemContainer view;
 
     public UnRegisterAdapter(@NonNull Context context, @Nullable OrderedRealmCollection<Todo> data, boolean autoUpdate, TodoDragListener dragListener, TodoController controller) {
         super(context, data, autoUpdate);
@@ -45,7 +46,7 @@ public class UnRegisterAdapter extends RealmRecyclerViewAdapter<Todo, UnRegister
 
     @Override
     public UnRegisterAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        ItemContainer view = (ItemContainer)LayoutInflater.from(context).inflate(R.layout.item_todo_before_register,parent,false);
+        view = (ItemContainer)LayoutInflater.from(context).inflate(R.layout.item_todo_before_register,parent,false);
         view.reset();
         return new ViewHolder(view);
     }
@@ -54,6 +55,7 @@ public class UnRegisterAdapter extends RealmRecyclerViewAdapter<Todo, UnRegister
     public void onBindViewHolder(UnRegisterAdapter.ViewHolder holder, int position) {
         Todo todo = datas.get(position);
         Log.e("tag",todo.getContent()+"");
+        ((ItemContainer) holder.itemView).reset();
         holder.tv_before_todoItem.setText(todo.getContent());
 
         holder.btn_befroe_flingable.setTag(todo.getNo());

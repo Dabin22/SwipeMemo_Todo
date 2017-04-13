@@ -44,6 +44,7 @@ public class RegisteredAdapter extends RealmRecyclerViewAdapter<SelectedTodo, Re
     private HashMap<Long,ItemContainer> viewList;
     private HashMap<Long,TextView> tvList;
 
+    private ItemContainer view;
     private TodoController controller;
     private OrderedRealmCollection<SelectedTodo> datas = null;
 
@@ -62,7 +63,7 @@ public class RegisteredAdapter extends RealmRecyclerViewAdapter<SelectedTodo, Re
 
     @Override
     public RegisteredAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        ItemContainer view = (ItemContainer)LayoutInflater.from(context).inflate(R.layout.item_todo_registered, parent, false);
+        view = (ItemContainer)LayoutInflater.from(context).inflate(R.layout.item_todo_registered, parent, false);
         return new ViewHolder(view);
     }
     private SelectedTodo todo;
@@ -70,7 +71,9 @@ public class RegisteredAdapter extends RealmRecyclerViewAdapter<SelectedTodo, Re
     public void onBindViewHolder(final RegisteredAdapter.ViewHolder holder, int position) {
         todo = datas.get(position);
 
+
         viewList.put(todo.getNo(),(ItemContainer)holder.itemView);
+        ((ItemContainer) holder.itemView).reset();
         setDragListener(todo.isDone(),todo.getNo());
 
 
