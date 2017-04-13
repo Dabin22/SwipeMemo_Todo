@@ -9,12 +9,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.swipememo.swipememo.R;
 import com.swipememo.swipememo.customviews.ItemContainer;
+import com.swipememo.swipememo.customviews.MenuView;
 import com.swipememo.swipememo.model.types.SelectedTodo;
 import com.swipememo.swipememo.model.types.TodoViewTag;
 import com.swipememo.swipememo.viewer.fragments.todo.controller.TodoController;
@@ -33,7 +35,7 @@ import io.realm.Sort;
  * Created by Dabin on 2016-11-27.
  */
 
-public class RegisteredAdapter extends RealmRecyclerViewAdapter<SelectedTodo, RegisteredAdapter.ViewHolder> implements CompoundButton.OnCheckedChangeListener {
+public class RegisteredAdapter extends RealmRecyclerViewAdapter<SelectedTodo, RegisteredAdapter.ViewHolder> implements View.OnClickListener {
 
 
     private TodoDragListener dragListener;
@@ -63,25 +65,29 @@ public class RegisteredAdapter extends RealmRecyclerViewAdapter<SelectedTodo, Re
         ItemContainer view = (ItemContainer)LayoutInflater.from(context).inflate(R.layout.item_todo_registered, parent, false);
         return new ViewHolder(view);
     }
-
+    private SelectedTodo todo;
     @Override
-    public void onBindViewHolder(RegisteredAdapter.ViewHolder holder, int position) {
-        final SelectedTodo todo = datas.get(position);
-        viewList.put(todo.getNo(),(ItemContainer)holder.itemView);
-        tvList.put(todo.getNo(),holder.tv_unput_todo);
-        holder.tv_unput_todo.setText(" "+todo.getContent()+" ");
-        holder.ck_todo_done.setTag(todo);
-        if(todo.isDone()){
-            holder.ck_todo_done.setChecked(true);
-            setDragListener(false,todo.getNo());
-            lineText(todo.isDone(),holder.tv_unput_todo);
-        }
-        holder.ck_todo_done.setOnCheckedChangeListener(null);
-        holder.ck_todo_done.setOnCheckedChangeListener(this);
+    public void onBindViewHolder(final RegisteredAdapter.ViewHolder holder, int position) {
+        todo = datas.get(position);
 
+        viewList.put(todo.getNo(),(ItemContainer)holder.itemView);
+        setDragListener(todo.isDone(),todo.getNo());
+
+
+        holder.tv_unput_todo.setText(" "+todo.getContent()+" ");
+
+        holder.ck_todo_done.setTag(todo);
+        holder.ck_todo_done.setChecked(todo.isDone());
+        holder.ck_todo_done.setOnClickListener(this);
+        lineText(todo.isDone(),holder.tv_unput_todo);
+
+        holder.btn_down.setTag(todo.getNo());
+        holder.btn_down.setOnClickListener(this);
+
+        holder.registered_delete.setTag(todo.getNo());
+        holder.registered_delete.setOnClickListener(this);
 
         TodoViewTag viewType = new TodoViewTag();
-
         viewType.setType(TodoViewTag.SELECTED_TODO);
         viewType.setNo(todo.getNo());
         holder.itemView.setTag(viewType);
@@ -92,16 +98,10 @@ public class RegisteredAdapter extends RealmRecyclerViewAdapter<SelectedTodo, Re
         return getData().size();
     }
 
-    @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-       controller.setDone((SelectedTodo)buttonView.getTag(),isChecked);
-        long no = ((SelectedTodo) buttonView.getTag()).getNo();
-        setDragListener(!isChecked,no);
-        lineText(isChecked,tvList.get(no));
-    }
+
 
     public void setDragListener(boolean done,long no){
-        viewList.get(no).setClickable(done);
+        viewList.get(no).setClickable(!done);
     }
 
     private void lineText(boolean isStriked,TextView textView){
@@ -112,15 +112,37 @@ public class RegisteredAdapter extends RealmRecyclerViewAdapter<SelectedTodo, Re
         }
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.todoItem_registered_checkbox:
+                SelectedTodo tempTodo = (SelectedTodo)v.getTag();
+                controller.setDone(tempTodo,!tempTodo.isDone());
+                break;
+            case R.id.todoItem_registered_down:
+                controller.register_cancle((long)v.getTag());
+                break;
+            case R.id.todoItem_registered_delete:
+                controller.checkDelete(TodoViewTag.SELECTED_TODO,(long)v.getTag());
+                break;
+            default:
+                break;
+
+        }
+    }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView tv_unput_todo;
         CheckBox ck_todo_done;
-
+        Button btn_down;
+        MenuView registered_delete;
         public ViewHolder(View itemView) {
             super(itemView);
             tv_unput_todo = (TextView) itemView.findViewById(R.id.todoItem_registered_text);
             ck_todo_done = (CheckBox) itemView.findViewById(R.id.todoItem_registered_checkbox);
+            btn_down = (Button)itemView.findViewById(R.id.todoItem_registered_down);
+            registered_delete = (MenuView)itemView.findViewById(R.id.todoItem_registered_delete);
             itemView.setOnDragListener(dragListener);
         }
     }

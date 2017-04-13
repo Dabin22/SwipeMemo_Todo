@@ -37,6 +37,13 @@
                 android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/todoItem_margin" />
+            <Button
+                android:layout_gravity="right|center_vertical"
+                android:id="@+id/todoItem_registered_down"
+                android:layout_height="@dimen/todoItem_default_item_height"
+                android:layout_width="25dp"
+                android:rotation="180"
+                android:background="@drawable/td_btn_flingable"/>
         </LinearLayout>
     </com.swipememo.swipememo.customviews.FlingCardView>
 </com.swipememo.swipememo.customviews.ItemContainer>

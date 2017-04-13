@@ -1,7 +1,9 @@
 package com.swipememo.swipememo.viewer.fragments.todo.view;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Build;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -155,5 +157,28 @@ public class TodoViewImpl implements TodoView, View.OnClickListener, DatePickerD
         Calendar select_cal = Calendar.getInstance();
         select_cal.set(year, monthOfYear, dayOfMonth);
         controller.changeDate(select_cal);
+    }
+
+    public void showDeleteDialog(final String type,final long no){
+        AlertDialog.Builder alt_bld = new AlertDialog.Builder(getContext());
+        alt_bld.setMessage("Do you want to delete Todo?").setCancelable(
+                false).setPositiveButton("Yes",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        controller.deleteTodo(type,no);
+                    }
+                }).setNegativeButton("No",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert = alt_bld.create();
+        // Title for AlertDialog
+        alert.setTitle("SwipeMemo");
+        // Icon for AlertDialog
+       // alert.setIcon(R.drawable.icon);
+        alert.show();
+
     }
 }

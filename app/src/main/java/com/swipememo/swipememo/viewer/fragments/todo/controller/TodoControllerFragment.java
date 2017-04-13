@@ -14,6 +14,7 @@ import com.swipememo.swipememo.model.database.DBHelper;
 import com.swipememo.swipememo.model.database.RealmHelper;
 import com.swipememo.swipememo.model.types.SelectedTodo;
 import com.swipememo.swipememo.model.types.Todo;
+import com.swipememo.swipememo.model.types.TodoViewTag;
 import com.swipememo.swipememo.viewer.fragments.todo.adapter.RegisteredAdapter;
 import com.swipememo.swipememo.viewer.fragments.todo.adapter.UnRegisterAdapter;
 import com.swipememo.swipememo.viewer.fragments.todo.listener.TodoDragListener;
@@ -137,7 +138,7 @@ public class TodoControllerFragment extends Fragment implements TodoController {
 
     @Override
     public UnRegisterAdapter getUnregisterAdapter() {
-        return new UnRegisterAdapter(getContext(), dbHelper.readAllTodo().sort("no", Sort.DESCENDING), true, dragListener);
+        return new UnRegisterAdapter(getContext(), dbHelper.readAllTodo().sort("no", Sort.DESCENDING), true, dragListener,this);
     }
 
     @Override
@@ -289,15 +290,22 @@ public class TodoControllerFragment extends Fragment implements TodoController {
     //드래깅한 아이템을 삭제하는 함수
     @Override
     public void deleteTodo(String type, long no) {
-        if (type.equals("Register Todo")) {
+        if (type.equals(TodoViewTag.SELECTED_TODO)) {
             dbHelper.deleteSelectedTodo(no);
-        } else if (type.equals("Todo"))
+        } else if (type.equals(TodoViewTag.TODO))
             dbHelper.deleteTodo(no);
     }
+
+
 
     @Override
     public void setDone(SelectedTodo todo,boolean done) {
         Log.e("tag","dbhelper setDone = " + todo.isDone());
         dbHelper.modifySelectedTodo(todo.getNo(),done,todo.getType(),todo.getContent(),todo.getBelongDate(),todo.getPutDate());
+    }
+
+    @Override
+    public void checkDelete(String type, long no) {
+        todoView.showDeleteDialog(type,no);
     }
 }

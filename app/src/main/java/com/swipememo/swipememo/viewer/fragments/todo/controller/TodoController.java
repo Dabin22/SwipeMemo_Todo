@@ -35,5 +35,7 @@ public interface TodoController {
 
     void setDone(SelectedTodo todo, boolean done);
 
+    void checkDelete(String type,long no);
+
     TodoDragListener getDragListener();
 }
